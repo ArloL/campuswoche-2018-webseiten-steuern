@@ -1,4 +1,4 @@
-package de.campuswoche;
+package de.campuswoche.browser;
 
 import java.util.concurrent.TimeUnit;
 
