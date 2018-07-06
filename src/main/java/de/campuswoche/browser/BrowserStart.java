@@ -7,7 +7,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +26,14 @@ public class BrowserStart implements ApplicationRunner {
 	}
 
 	@Autowired
-	WebDriver driver;
-	@Autowired
-	WebDriverWait webDriverWait;
+	WebDriver browser;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 
-		driver.get("http://www.youtube.com");
+		browser.get("http://www.youtube.com");
 
-		List<WebElement> elements = driver.findElements(By.cssSelector("a"));
+		List<WebElement> elements = browser.findElements(By.cssSelector("a"));
 
 		List<String> links = elements.stream()
 		    .filter(e -> e.getText() != null && !e.getText().isEmpty())
@@ -44,7 +41,7 @@ public class BrowserStart implements ApplicationRunner {
 
 		LOG.info("{}", links);
 
-		driver.quit();
+		browser.quit();
 
 	}
 
