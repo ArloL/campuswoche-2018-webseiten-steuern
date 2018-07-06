@@ -16,7 +16,7 @@ public class BrowserConfiguration {
 
 	long timeout = 15L;
 
-	@Bean
+	@Bean(destroyMethod = "quit")
 	WebDriver driver() {
 		ProxyConfig proxyConfig = new ProxyConfig(ProxyConfig.Type.HTTP,
 		    "proxy.herbrand.rz.evosec.de", 8080);
