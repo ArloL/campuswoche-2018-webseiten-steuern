@@ -24,7 +24,7 @@
         <requirement
             name="org.springframework.ide.eclipse.boot.feature.feature.group"/>
         <repository
-            url="http://dist.springsource.com/release/TOOLS/update/e4.4/"/>
+            url="http://download.springsource.com/release/TOOLS/update/e4.8/"/>
         <description></description>
       </setupTask>
       <setupTask
