@@ -32,11 +32,40 @@ public class BrowserStart implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+		qis();
+
+		vertretungsplan();
+
 		beiMilla();
 
 		truckstopBocholt();
 
 		browser.quit();
+	}
+
+	private void qis() {
+		browser.get("https://qis.w-hs.de");
+
+		WebElement benutzername = webDriverWait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#asdf")));
+		benutzername.sendKeys("123456");
+
+		WebElement password = webDriverWait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#fdsa")));
+		password.sendKeys("123456");
+
+		WebElement anmelden = webDriverWait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input.submit")));
+		anmelden.click();
+	}
+
+	private void vertretungsplan() {
+		browser.get("http://www.bkbocholt-west.de/medien/Stundenplan/Klassenplan/index_ITM.htm");
+
+		WebElement vertretungsplan = webDriverWait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("table[rules=all]")));
+
+		LOG.info("Vetretungsplan: {}", vertretungsplan.getText());
 	}
 
 	private void beiMilla() {
