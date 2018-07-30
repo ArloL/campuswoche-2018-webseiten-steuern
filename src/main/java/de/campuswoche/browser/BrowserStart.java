@@ -1,23 +1,15 @@
 package de.campuswoche.browser;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BrowserStart implements ApplicationRunner {
+public class BrowserStart extends BrowserBase implements ApplicationRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BrowserStart.class);
 
@@ -25,74 +17,64 @@ public class BrowserStart implements ApplicationRunner {
 		SpringApplication.run(BrowserStart.class, args);
 	}
 
-	@Autowired
-	WebDriver browser;
-	@Autowired
-	WebDriverWait webDriverWait;
-
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		qis();
+		LOG.info("Reserviere Plätze");
 
-		vertretungsplan();
+		openWebsite("https://www.kinodrom.de/");
 
-		beiMilla();
+		sleep(5);
 
-		truckstopBocholt();
+		clickLinkWithText("Programm/Tickets");
+
+		sleep(5);
+
+		clickLinkWithText("Ant-Man and the Wasp");
+
+		sleep(5);
+
+		findElement(By.cssSelector("a[data-bis='2018-07-30*20:00:00']")).click();
+
+		sleep(5);
+
+		browser.switchTo().frame("kinoheld-widget");
+
+		findElement(By.cssSelector("div[data-r='Q'][data-n='1']")).click();
+
+		sleep(5);
+
+		findElement(By.cssSelector("button[data-type=reservation]")).click();
+
+		sleep(5);
+
+		findElement(By.id("reservation--email")).click();
+
+		sendKeys("a.okeeffe");
+		sendAtKey();
+		sendKeys("evosec.de");
+
+		sleep(5);
+
+		findElement(By.cssSelector("label[for=reservation--tos] p")).click();
+
+		sleep(5);
+
+		findElement(By.cssSelector("button[data-type=next]")).click();
+
+		sleep(5);
+
+		String stornoLink = findElement(By.xpath("//p[contains(text(),'Stornierung der Reservierung')]/a"))
+				.getAttribute("href");
+
+		openWebsite(stornoLink);
+
+		sleep(5);
+
+		findElement(By.cssSelector("button[data-type=cancel_reservation]")).click();
+
+		LOG.info("Plätze reserviert");
 
 		browser.quit();
-	}
-
-	private void qis() {
-		browser.get("https://qis.w-hs.de");
-
-		WebElement benutzername = webDriverWait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#asdf")));
-		benutzername.sendKeys("123456");
-
-		WebElement password = webDriverWait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#fdsa")));
-		password.sendKeys("123456");
-
-		WebElement anmelden = webDriverWait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input.submit")));
-		anmelden.click();
-	}
-
-	private void vertretungsplan() {
-		browser.get("http://www.bkbocholt-west.de/medien/Stundenplan/Klassenplan/index_ITM.htm");
-
-		WebElement vertretungsplan = webDriverWait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("table[rules=all]")));
-
-		LOG.info("Vetretungsplan: {}", vertretungsplan.getText());
-	}
-
-	private void beiMilla() {
-		browser.get("https://cityhotel-bocholt.de/wochen-mittagskarte/");
-
-		WebElement milla = webDriverWait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.aligncenter.size-large")));
-
-		LOG.info("Milla Links: {}", milla.getAttribute("src"));
-	}
-
-	private void truckstopBocholt() {
-		browser.get("http://truckstop-bocholt.de/");
-
-		WebElement mittagstisch = webDriverWait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Mittagstisch")));
-
-		String link = mittagstisch.getAttribute("href");
-
-		browser.get(link);
-
-		browser.switchTo().frame("CustomTappIframe");
-
-		List<WebElement> elements = webDriverWait
-				.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("iframe")));
-
-		LOG.info("TruckStop Links: {}", elements.stream().map(e -> e.getAttribute("src")).collect(Collectors.toList()));
 	}
 
 }
