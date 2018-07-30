@@ -1,5 +1,6 @@
 package de.campuswoche.browser;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -26,6 +27,11 @@ public class BrowserBase {
 	public WebElement findElement(By by) {
 		return webDriverWait
 				.until(ExpectedConditions.visibilityOfElementLocated(by));
+	}
+
+	public List<WebElement> findElements(By by) {
+		return webDriverWait
+				.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
 	}
 
 	public void clickLinkWithText(String linkText) {
