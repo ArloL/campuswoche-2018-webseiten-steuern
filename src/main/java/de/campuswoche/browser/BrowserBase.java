@@ -34,7 +34,7 @@ public class BrowserBase {
 
 	public void sleep(long seconds) {
 		try {
-			TimeUnit.SECONDS.sleep(5);
+			TimeUnit.SECONDS.sleep(seconds);
 		} catch (InterruptedException e) {
 		}
 	}
