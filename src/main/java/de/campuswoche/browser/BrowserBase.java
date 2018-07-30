@@ -60,8 +60,23 @@ public class BrowserBase {
 	}
 
 	public void removeElement(String cssSelector) {
-		browser.executeScript(
-				"var node = document.querySelector('" + cssSelector + "'); node.parentNode.removeChild(node);");
+		String script = "";
+		script += "var node = document.querySelector('";
+		script += cssSelector;
+		script += "');";
+		script += "node.parentNode.removeChild(node);";
+		browser.executeScript(script);
+	}
+
+	public void removeElements(String cssSelector) {
+		String script = "var nodes = document.querySelectorAll(' ";
+		script += cssSelector;
+		script += "'), i;";
+		script += "for (i = 0; i < nodes.length; ++i) {";
+		script += "  var node = nodes[i];";
+		script += "  node.parentNode.removeChild(node);";
+		script += "}";
+		browser.executeScript(script);
 	}
 
 }
