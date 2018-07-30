@@ -24,7 +24,8 @@ public class BrowserBase {
 	}
 
 	public WebElement findElement(By by) {
-		return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(by));
+		return webDriverWait
+				.until(ExpectedConditions.visibilityOfElementLocated(by));
 	}
 
 	public void clickLinkWithText(String linkText) {
