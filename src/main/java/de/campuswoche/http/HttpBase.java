@@ -13,7 +13,7 @@ public class HttpBase {
 	@Autowired
 	Environment environment;
 	Document document;
-	
+
 	public void openWebsite(String url) throws IOException {
 		document = connect(url).get();
 	}
