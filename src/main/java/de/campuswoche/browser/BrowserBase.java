@@ -54,4 +54,9 @@ public class BrowserBase {
 		keyboard.releaseKey(Keys.CONTROL);
 	}
 
+	public void removeElement(String cssSelector) {
+		browser.executeScript(
+				"var node = document.querySelector('" + cssSelector + "'); node.parentNode.removeChild(node);");
+	}
+
 }
