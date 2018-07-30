@@ -36,6 +36,8 @@ public class BrowserBase {
 
 	public void clickLinkWithText(String linkText) {
 		WebElement element = findElement(By.partialLinkText(linkText));
+		scrollIntoView(element);
+		removeCssClass(findElement(By.className("nav")), "sticky");
 		element.click();
 	}
 
@@ -92,6 +94,20 @@ public class BrowserBase {
 		script += "');";
 		script += "node.value = '" + value + "';";
 		browser.executeScript(script);
+	}
+
+	public void setValue(WebElement element, String value) {
+		String script = "arguments[0].value = '" + value + "';";
+		browser.executeScript(script, element);
+	}
+
+	public void scrollIntoView(WebElement element) {
+		browser.executeScript("arguments[0].scrollIntoView(true)", element);
+	}
+
+	public void removeCssClass(WebElement element, String cssClass) {
+		browser.executeScript(
+				"arguments[0].classList.remove('" + cssClass + "');", element);
 	}
 
 }
