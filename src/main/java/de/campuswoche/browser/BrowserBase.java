@@ -79,4 +79,13 @@ public class BrowserBase {
 		browser.executeScript(script);
 	}
 
+	public void setValue(String cssSelector, String value) {
+		String script = "";
+		script += "var node = document.querySelector('";
+		script += cssSelector;
+		script += "');";
+		script += "node.value = '" + value + "';";
+		browser.executeScript(script);
+	}
+
 }
