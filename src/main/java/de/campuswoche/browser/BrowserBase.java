@@ -9,8 +9,6 @@ import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 
 import com.machinepublishers.jbrowserdriver.JBrowserDriver;
 
@@ -20,16 +18,13 @@ public class BrowserBase {
 	WebDriverWait webDriverWait;
 	@Autowired
 	JBrowserDriver browser;
-	@Autowired
-	JavaMailSender emailSender;
 
 	public void openWebsite(String url) {
 		browser.get(url);
 	}
 
 	public WebElement findElement(By by) {
-		return webDriverWait
-				.until(ExpectedConditions.visibilityOfElementLocated(by));
+		return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(by));
 	}
 
 	public void clickLinkWithText(String linkText) {
@@ -57,16 +52,6 @@ public class BrowserBase {
 		keyboard.releaseKey("q");
 		keyboard.releaseKey(Keys.ALT);
 		keyboard.releaseKey(Keys.CONTROL);
-	}
-
-	public void sendSimpleMessage(String from, String to, String subject,
-			String text) {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(to);
-		message.setFrom(from);
-		message.setSubject(subject);
-		message.setText(text);
-		emailSender.send(message);
 	}
 
 }
