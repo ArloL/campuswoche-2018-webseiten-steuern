@@ -29,6 +29,8 @@ public class BrowserStart extends BrowserBase implements ApplicationRunner {
 
 		sleep(5);
 
+		removeElement(".nav");
+
 		clickLinkWithText("Ant-Man and the Wasp");
 
 		sleep(5);
@@ -36,6 +38,8 @@ public class BrowserStart extends BrowserBase implements ApplicationRunner {
 		findElement(By.cssSelector("a[data-bis='2018-07-30*20:00:00']")).click();
 
 		sleep(5);
+
+		removeElement(".nav");
 
 		browser.switchTo().frame("kinoheld-widget");
 
