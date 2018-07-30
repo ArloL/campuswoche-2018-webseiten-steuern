@@ -30,7 +30,7 @@ public class BrowserStart extends BrowserBase implements ApplicationRunner {
 
 		sleep(5);
 
-		removeElement(".nav");
+		removeElements(".nav");
 
 		clickLinkWithText("Ant-Man and the Wasp");
 
@@ -41,7 +41,7 @@ public class BrowserStart extends BrowserBase implements ApplicationRunner {
 
 		sleep(5);
 
-		removeElement(".nav");
+		removeElements(".nav");
 
 		browser.switchTo().frame("kinoheld-widget");
 
