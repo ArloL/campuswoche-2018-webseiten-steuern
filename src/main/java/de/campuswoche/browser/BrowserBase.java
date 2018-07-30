@@ -28,7 +28,8 @@ public class BrowserBase {
 	}
 
 	public WebElement findElement(By by) {
-		return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(by));
+		return webDriverWait
+				.until(ExpectedConditions.visibilityOfElementLocated(by));
 	}
 
 	public void clickLinkWithText(String linkText) {
@@ -58,7 +59,8 @@ public class BrowserBase {
 		keyboard.releaseKey(Keys.CONTROL);
 	}
 
-	public void sendSimpleMessage(String from, String to, String subject, String text) {
+	public void sendSimpleMessage(String from, String to, String subject,
+			String text) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(to);
 		message.setFrom(from);

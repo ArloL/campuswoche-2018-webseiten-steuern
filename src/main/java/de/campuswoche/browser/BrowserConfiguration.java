@@ -25,7 +25,7 @@ public class BrowserConfiguration {
 		Settings settings = settingsBuilder.build();
 
 		JBrowserDriver driver = new JBrowserDriver(settings);
-		
+
 		driver.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
 		driver.manage().timeouts().setScriptTimeout(timeout, TimeUnit.SECONDS);

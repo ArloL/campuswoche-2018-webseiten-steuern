@@ -11,7 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BrowserStart extends BrowserBase implements ApplicationRunner {
 
-	private static final Logger LOG = LoggerFactory.getLogger(BrowserStart.class);
+	private static final Logger LOG = LoggerFactory
+			.getLogger(BrowserStart.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BrowserStart.class, args);
@@ -33,7 +34,8 @@ public class BrowserStart extends BrowserBase implements ApplicationRunner {
 
 		sleep(5);
 
-		findElement(By.cssSelector("a[data-bis='2018-07-30*20:00:00']")).click();
+		findElement(By.cssSelector("a[data-bis='2018-07-30*20:00:00']"))
+				.click();
 
 		sleep(5);
 
@@ -63,14 +65,16 @@ public class BrowserStart extends BrowserBase implements ApplicationRunner {
 
 		sleep(5);
 
-		String stornoLink = findElement(By.xpath("//p[contains(text(),'Stornierung der Reservierung')]/a"))
-				.getAttribute("href");
+		String stornoLink = findElement(By.xpath(
+				"//p[contains(text(),'Stornierung der Reservierung')]/a"))
+						.getAttribute("href");
 
 		openWebsite(stornoLink);
 
 		sleep(5);
 
-		findElement(By.cssSelector("button[data-type=cancel_reservation]")).click();
+		findElement(By.cssSelector("button[data-type=cancel_reservation]"))
+				.click();
 
 		LOG.info("Plätze reserviert");
 
