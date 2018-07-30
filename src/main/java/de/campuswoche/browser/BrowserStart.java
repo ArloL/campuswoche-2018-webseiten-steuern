@@ -35,7 +35,7 @@ public class BrowserStart extends BrowserBase implements ApplicationRunner {
 
 		sleep(5);
 
-		findElement(By.cssSelector("a[data-bis='2018-07-30*20:00:00']")).click();
+		findElement(By.cssSelector("a[data-bis='2018-07-31*20:00:00']")).click();
 
 		sleep(5);
 
