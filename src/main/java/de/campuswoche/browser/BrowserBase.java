@@ -32,6 +32,10 @@ public class BrowserBase {
 		element.click();
 	}
 
+	public void sleep() {
+		sleep(5);
+	}
+
 	public void sleep(long seconds) {
 		try {
 			TimeUnit.SECONDS.sleep(seconds);
