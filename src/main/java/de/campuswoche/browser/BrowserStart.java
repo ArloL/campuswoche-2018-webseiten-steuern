@@ -22,67 +22,22 @@ public class BrowserStart extends BrowserBase implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		LOG.info("Reserviere Plätze");
 
-		openWebsite("https://www.kinodrom.de/");
+		openWebsite("https://www.cinemaxx.de/kinoprogramm/munchen");
 
-		sleep(5);
+		sleep();
 
-		clickLinkWithText("Programm/Tickets");
+		openWebsite(
+				"https://www.cinemaxx.de/film/harry-potter-und-der-stein-der-weisen/");
 
-		sleep(5);
+		sleep();
 
-		removeElements(".nav");
+		clickLinkWithText("20:00");
 
-		clickLinkWithText("Ant-Man and the Wasp");
+		sleep();
 
-		sleep(5);
+		findElement(By.id("step2-btn")).click();
 
-		findElement(By.cssSelector("a[data-bis='2018-07-31*20:00:00']"))
-				.click();
-
-		sleep(5);
-
-		removeElements(".nav");
-
-		browser.switchTo().frame("kinoheld-widget");
-
-		findElement(By.cssSelector("div[data-r='Q'][data-n='1']")).click();
-
-		sleep(5);
-
-		findElement(By.cssSelector("button[data-type=reservation]")).click();
-
-		sleep(5);
-
-		findElement(By.id("reservation--email")).click();
-
-		sendKeys("a.okeeffe");
-		sendAtKey();
-		sendKeys("evosec.de");
-
-		sleep(5);
-
-		findElement(By.cssSelector("label[for=reservation--tos] p")).click();
-
-		sleep(5);
-
-		findElement(By.cssSelector("button[data-type=next]")).click();
-
-		sleep(5);
-
-		String stornoLink = findElement(By.xpath(
-				"//p[contains(text(),'Stornierung der Reservierung')]/a"))
-						.getAttribute("href");
-
-		openWebsite(stornoLink);
-
-		sleep(5);
-
-		findElement(By.cssSelector("button[data-type=cancel_reservation]"))
-				.click();
-
-		LOG.info("Plätze reserviert");
-
-		browser.quit();
+		sleep(500);
 	}
 
 }
