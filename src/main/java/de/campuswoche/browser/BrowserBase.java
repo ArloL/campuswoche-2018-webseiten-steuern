@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Keyboard;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,18 +53,13 @@ public class BrowserBase {
 	}
 
 	public void sendKeys(String keys) {
-		browser.getKeyboard().sendKeys(keys);
+		new Actions(browser).sendKeys(keys).perform();
 	}
 
 	public void sendAtKey() {
-		Keyboard keyboard = browser.getKeyboard();
-
-		keyboard.pressKey(Keys.CONTROL);
-		keyboard.pressKey(Keys.ALT);
-		keyboard.pressKey("q");
-		keyboard.releaseKey("q");
-		keyboard.releaseKey(Keys.ALT);
-		keyboard.releaseKey(Keys.CONTROL);
+		new Actions(browser).keyDown(Keys.CONTROL).keyDown(Keys.ALT)
+				.keyDown("q").keyUp("q").keyUp(Keys.ALT).keyUp(Keys.CONTROL)
+				.perform();
 	}
 
 	public void removeElement(String cssSelector) {

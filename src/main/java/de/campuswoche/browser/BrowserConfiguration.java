@@ -1,6 +1,6 @@
 package de.campuswoche.browser;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,7 +13,7 @@ import com.machinepublishers.jbrowserdriver.Settings;
 @Configuration
 public class BrowserConfiguration {
 
-	long timeout = 15L;
+	Duration timeout = Duration.ofSeconds(15L);
 
 	@Bean(destroyMethod = "quit")
 	JBrowserDriver driver() {
@@ -26,9 +26,9 @@ public class BrowserConfiguration {
 
 		JBrowserDriver driver = new JBrowserDriver(settings);
 
-		driver.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
-		driver.manage().timeouts().setScriptTimeout(timeout, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(timeout);
+		driver.manage().timeouts().implicitlyWait(timeout);
+		driver.manage().timeouts().scriptTimeout(timeout);
 
 		return driver;
 	}
