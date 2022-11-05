@@ -10,7 +10,7 @@ on:
   schedule:
   - cron: '47 7 16 * *'
 env:
-  JAVA_VERSION: 17
+  JAVA_VERSION: 8
 
 jobs:
   debug:
@@ -49,7 +49,7 @@ jobs:
     - uses: actions/setup-java@v3.6.0
       with:
         java-version: ${{ env.JAVA_VERSION }}
-        distribution: adopt
+        distribution: temurin
         cache: 'maven'
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2.1.29
