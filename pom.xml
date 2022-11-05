@@ -17,6 +17,10 @@
     <name>workshop-2018-webseiten-steuern</name>
     <description>Project for Campuswoche 2018 Workshop Webseiten auslesen und fernsteuern</description>
 
+    <properties>
+        <start-class>de.campuswoche.http.HttpStart</start-class>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
